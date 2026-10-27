@@ -1,0 +1,674 @@
+
+/* =========================================
+   1. VARIABLES Y ESTILOS GENERALES
+========================================= */
+
+:root {
+  font-family: Arial, sans-serif;
+
+  --color-primary: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-text: #111827;
+  --color-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-background: #ffffff;
+  --color-light: #eff6ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 0.1875rem solid var(--color-primary);
+  outline-offset: 0.1875rem;
+}
+
+
+/* =========================================
+   2. HOME - MOBILE FIRST
+========================================= */
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 4.5rem;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.home-logo {
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.home-header nav a {
+  font-size: 0.875rem;
+  text-decoration: none;
+  color: #374151;
+  white-space: nowrap;
+}
+
+.home-header nav a:hover {
+  color: var(--color-primary);
+}
+
+.home-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100dvh - 4.5rem);
+  padding: 2rem 1rem;
+  background: linear-gradient(
+    135deg,
+    #eff6ff,
+    #ffffff
+  );
+}
+
+.home-hero {
+  width: 100%;
+  max-width: 52rem;
+  text-align: center;
+}
+
+.home-hero h1 {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.2;
+  margin: 0 0 1.25rem;
+}
+
+.home-hero p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-secondary);
+  margin: 0 0 2rem;
+}
+
+#iniciar-chat {
+  width: 100%;
+  padding: 0.9375rem 2rem;
+  border: none;
+  border-radius: 0.75rem;
+  background-color: var(--color-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+#iniciar-chat:hover {
+  background-color: var(--color-primary-hover);
+}
+
+
+/* =========================================
+   3. SELECCION DE PERSONAJES EN HOME
+========================================= */
+
+.personajes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.personajes[hidden] {
+  display: none;
+}
+
+.personajes a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 5rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background-color: white;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.personajes a:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-light);
+}
+
+
+/* =========================================
+   4. CONTENEDOR PRINCIPAL DEL CHAT
+========================================= */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 72rem;
+  height: 100dvh;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 0 0.75rem 0.75rem;
+}
+
+.chat-container > p {
+  margin: 0.75rem 0.25rem;
+  color: var(--color-secondary);
+  font-size: 0.875rem;
+}
+
+
+/* =========================================
+   5. ENCABEZADO DEL CHAT
+========================================= */
+
+.chat-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+#menu-button,
+#character-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--color-text);
+}
+
+#menu-button:hover,
+#character-button:hover {
+  background-color: var(--color-light);
+}
+
+#menu-button {
+  font-size: 1.5rem;
+}
+
+#character-button {
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+
+/* =========================================
+   6. SELECTOR DE PERSONAJES DEL CHAT
+========================================= */
+
+.character-selector {
+  position: relative;
+}
+
+.character-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 20;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  min-width: 13.75rem;
+  max-width: 85vw;
+  padding: 0.5rem;
+
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12);
+}
+
+.character-menu[hidden] {
+  display: none;
+}
+
+.character-menu a {
+  display: block;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.character-menu a:hover,
+.character-menu a[aria-current="page"] {
+  background-color: var(--color-light);
+  color: var(--color-primary-hover);
+}
+
+
+/* =========================================
+   7. MENSAJES DEL CHAT
+========================================= */
+
+#chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  flex: 1;
+  min-height: 0;
+
+  padding: 1rem 0.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.message-user,
+.message-character {
+  width: fit-content;
+  max-width: 90%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.message-user {
+  align-self: flex-end;
+  margin: 0 0 0 auto;
+  background-color: #dbeafe;
+  color: #1e3a8a;
+}
+
+.message-character {
+  align-self: flex-start;
+  margin: 0 auto 0 0;
+  background-color: #f3f4f6;
+  color: var(--color-text);
+}
+
+.typing-indicator {
+  font-style: italic;
+  color: var(--color-secondary);
+}
+
+
+/* =========================================
+   8. FORMULARIO DEL CHAT
+========================================= */
+
+#chat-form {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-border);
+}
+
+#message-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.625rem;
+  font-size: 1rem;
+}
+
+#chat-form button {
+  padding: 0.75rem 1rem;
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: 0.625rem;
+  font-weight: bold;
+}
+
+#chat-form button:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
+#chat-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+
+/* =========================================
+   9. SIDEBAR E HISTORIAL
+========================================= */
+
+#chat-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  width: 17.5rem;
+  max-width: 85vw;
+  height: 100dvh;
+  padding: 1.25rem;
+
+  background-color: white;
+  box-shadow: 0.25rem 0 1rem rgba(0, 0, 0, 0.15);
+
+  overflow-y: auto;
+  transition: transform 0.3s ease;
+}
+
+.sidebar-hidden {
+  transform: translateX(-110%);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sidebar-header h2 {
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+#close-sidebar {
+  padding: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  font-size: 1.25rem;
+}
+
+#close-sidebar:hover {
+  background-color: var(--color-light);
+}
+
+#new-chat {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+
+  border: none;
+  border-radius: 0.625rem;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+}
+
+#new-chat:hover {
+  background-color: var(--color-primary-hover);
+}
+
+#sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.overlay-hidden {
+  display: none;
+}
+
+#chat-history {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.history-item {
+  width: 100%;
+  padding: 0.75rem;
+
+  border: none;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  color: var(--color-text);
+  text-align: left;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.history-item:hover {
+  background-color: #f0f0f0;
+}
+
+
+/* =========================================
+   10. ABOUT - ESTILOS GENERALES
+========================================= */
+
+#app > main:not(.home-main),
+#app > section:not(.chat-container) {
+  width: 100%;
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================
+   11. TABLET - DESDE 768px
+========================================= */
+
+@media (min-width: 48rem) {
+
+  .home-header {
+    padding: 1rem 2rem;
+  }
+
+  .home-logo {
+    font-size: 1.25rem;
+  }
+
+  .home-header nav a {
+    font-size: 1rem;
+  }
+
+  .home-main {
+    padding: 3rem 2rem;
+  }
+
+  .home-hero p {
+    font-size: 1.125rem;
+  }
+
+  #iniciar-chat {
+    width: auto;
+    min-width: 12rem;
+  }
+
+  .personajes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .chat-container {
+    padding: 0 1.5rem 1rem;
+  }
+
+  .chat-header {
+    padding: 1rem 0;
+  }
+
+  #character-button {
+    font-size: 1rem;
+  }
+
+  .message-user,
+  .message-character {
+    max-width: 75%;
+  }
+
+  #chat-form {
+    gap: 0.75rem;
+  }
+
+  #chat-form button {
+    padding: 0.75rem 1.5rem;
+  }
+
+  #app > main:not(.home-main),
+  #app > section:not(.chat-container) {
+    padding: 3rem 2rem;
+  }
+}
+
+
+/* =========================================
+   12. DESKTOP - DESDE 1024px
+========================================= */
+
+@media (min-width: 64rem) {
+
+  .home-header {
+    padding: 1.25rem 3rem;
+  }
+
+  .home-main {
+    padding: 4rem 2rem;
+  }
+
+  .home-hero h1 {
+    font-size: 3.5rem;
+  }
+
+  .personajes {
+    gap: 1.5rem;
+  }
+
+  .personajes a {
+    min-height: 6rem;
+    font-size: 1.125rem;
+  }
+
+  .chat-container {
+    padding: 0 2rem 1.5rem;
+  }
+
+  #chat-messages {
+    padding: 1.5rem;
+  }
+
+  .message-user,
+  .message-character {
+    max-width: 65%;
+    font-size: 1rem;
+  }
+
+  #chat-sidebar {
+    width: 20rem;
+  }
+
+  #app > main:not(.home-main),
+  #app > section:not(.chat-container) {
+    padding: 4rem 2rem;
+  }
+}
+
+
+/* =========================================
+   13. ACCESIBILIDAD
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* NAVEGACION DEL SIDEBAR */
+
+/* NAVEGACION DEL CHAT */
+
+#menu-button {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.character-selector {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  min-width: 0;
+}
+
+.chat-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+.chat-nav a {
+  padding: 0.5rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.chat-nav a:hover {
+  color: var(--color-primary);
+}
+
+/* TABLET Y DESKTOP */
+
+@media (min-width: 48rem) {
+  .chat-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .chat-nav {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .character-selector {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
