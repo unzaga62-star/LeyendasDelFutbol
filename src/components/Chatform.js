@@ -8,6 +8,7 @@ export function renderChatForm() {
         placeholder="Escribí tu mensaje..."
         autocomplete="off"
         aria-label="Escribir mensaje"
+        maxlength="2000"
         required
       >
 

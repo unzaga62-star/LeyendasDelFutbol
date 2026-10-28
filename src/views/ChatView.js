@@ -99,10 +99,16 @@ export function renderChat() {
         <div id="chat-history">
           <p>Todavía no tenés conversaciones guardadas.</p>
         </div>
+        </div>
 
       </nav>
 
-      <p>Conversá con tu leyenda del fútbol.</p>
+      
+      <p class="chat-tagline">
+       ⚽  VESTUARIO VIRTUAL
+      <span>· Conversá con tu leyenda del fútbol</span>
+      </p>
+
 
       <div id="chat-messages" aria-live="polite">
         <p class="message-character">
@@ -460,54 +466,42 @@ mostrarConversaciones()
 
 
     try {
-      // La petición HTTP se realiza en ChatApi.js
+  const data = await enviarMensaje(
+    message,
+    personaje,
+    historialDeLaPeticion
+  )
 
-      const data = await enviarMensaje(
-        message,
-        personaje,
-        historialDeLaPeticion,
-      )
+  const mensajeGemini = {
+    role: 'model',
+    parts: [{ text: data.reply }]
+  }
 
-      // Eliminar indicador antes de mostrar la respuesta
+  // Recuperar la última versión de la conversación
+  const conversacionesGuardadas = obtenerConversaciones()
 
-      if (conversacionActual.id === conversacionDeLaPeticion.id) {
-    messagesContainer
-    .querySelectorAll('.typing-indicator')
-    .forEach((indicador) => indicador.remove())
+  const conversacionGuardada = conversacionesGuardadas.find(
+    (conversacion) =>
+      conversacion.id === conversacionDeLaPeticion.id
+  )
 
-  addMessage(data.reply, 'model')
-}
+  const conversacionParaGuardar =
+    conversacionGuardada || conversacionDeLaPeticion
 
-      const mensajeGemini = {
-        role: 'model',
-        parts: [{ text: data.reply }]
+  // Agregar la respuesta de Gemini
+  conversacionParaGuardar.mensajes.push(mensajeGemini)
+
+  // Guardar la conversación actualizada
+  guardarEnStorage([conversacionParaGuardar])
+
+  // Notificar que hay nuevos mensajes
+  window.dispatchEvent(
+    new CustomEvent('conversacion-actualizada', {
+      detail: {
+        id: conversacionParaGuardar.id
       }
-
-      const conversacionesGuardadas = obtenerConversaciones()
-
-      const conversacionGuardada = conversacionesGuardadas.find(
-      (conversacion) => conversacion.id === conversacionDeLaPeticion.id
-      )
-
-      const conversacionParaGuardar =
-      conversacionGuardada || conversacionDeLaPeticion
-
-      conversacionParaGuardar.mensajes.push(mensajeGemini)
-
-      guardarEnStorage([conversacionParaGuardar])
-      mostrarConversaciones()
-
-      if (conversacionActual.id === conversacionParaGuardar.id) {
-    conversacionActual = conversacionParaGuardar
-    }
-
-    window.dispatchEvent(
-  new CustomEvent('conversacion-actualizada', {
-    detail: {
-      id: conversacionParaGuardar.id
-    }
-  })
-)
+    })
+  )
 
     } catch (error) {
       console.error('Error al enviar el mensaje:', error)

@@ -23,7 +23,7 @@ describe('ChatApi', () => {
 
     const resultado = await enviarMensaje(
       'Hola',
-      'messi',
+      'bilardo',
       historial
     )
 
@@ -35,7 +35,7 @@ describe('ChatApi', () => {
         method: 'POST',
         body: JSON.stringify({
           message: 'Hola',
-          personaje: 'messi',
+          personaje: 'bilardo',
           historial
         })
       })
@@ -50,7 +50,7 @@ describe('ChatApi', () => {
     }))
 
     await expect(
-      enviarMensaje('Hola', 'messi', historial)
+      enviarMensaje('Hola', 'bilardo', historial)
     ).rejects.toThrow('Servicio no disponible')
   })
 
@@ -62,7 +62,7 @@ describe('ChatApi', () => {
     }))
 
     await expect(
-      enviarMensaje('Hola', 'messi', historial)
+      enviarMensaje('Hola', 'bilardo', historial)
     ).rejects.toThrow()
   })
 

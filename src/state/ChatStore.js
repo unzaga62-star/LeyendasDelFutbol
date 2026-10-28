@@ -35,12 +35,14 @@ export function guardarConversaciones(conversaciones) {
         (guardada) => guardada.id === conversacion.id
       )
 
-      if (indice === -1) {
-        conversacionesActualizadas.push(conversacion)
-      } else {
-        conversacionesActualizadas[indice] = conversacion
+      
+      if (indice !== -1) {
+      conversacionesActualizadas.splice(indice, 1)
       }
-    })
+
+      conversacionesActualizadas.push(conversacion)
+
+      })
 
     localStorage.setItem(
       STORAGE_KEY,

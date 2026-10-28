@@ -1,18 +1,16 @@
-
-/* =========================================
-   1. VARIABLES Y ESTILOS GENERALES
-========================================= */
+/* ========================================
+   1. BASE Y PALETA DE COLORES
+======================================== */
 
 :root {
   font-family: Arial, sans-serif;
-
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
-  --color-text: #111827;
-  --color-secondary: #6b7280;
-  --color-border: #e5e7eb;
-  --color-background: #ffffff;
-  --color-light: #eff6ff;
+  --color-primary: #c7f36b;
+  --color-primary-hover: #dcff91;
+  --color-text: #f1f8ee;
+  --color-secondary: #b9d0bf;
+  --color-border: #345840;
+  --color-background: #071a14;
+  --color-light: #244935;
 }
 
 * {
@@ -26,7 +24,7 @@ html {
 body {
   margin: 0;
   min-height: 100dvh;
-  background-color: var(--color-background);
+  background: var(--color-background);
   color: var(--color-text);
 }
 
@@ -46,32 +44,40 @@ input:focus-visible {
   outline-offset: 0.1875rem;
 }
 
-
-/* =========================================
-   2. HOME - MOBILE FIRST
-========================================= */
+/* ========================================
+   2. ENCABEZADO COMPARTIDO HOME / ABOUT
+======================================== */
 
 .home-header {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   min-height: 4.5rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--color-border);
+  background: #091d17;
+  border-bottom: 1px solid #254a38;
 }
 
 .home-logo {
+  color: #ffffff;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 800;
+  letter-spacing: -0.03em;
   text-decoration: none;
-  color: var(--color-text);
+}
+
+.home-logo span {
+  color: var(--color-primary);
 }
 
 .home-header nav a {
+  color: #d6e6da;
   font-size: 0.875rem;
+  font-weight: 600;
   text-decoration: none;
-  color: #374151;
   white-space: nowrap;
 }
 
@@ -79,97 +85,189 @@ input:focus-visible {
   color: var(--color-primary);
 }
 
+/* ========================================
+   3. HOME / ESTADIO
+======================================== */
+
 .home-main {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100dvh - 4.5rem);
-  padding: 2rem 1rem;
-  background: linear-gradient(
-    135deg,
-    #eff6ff,
-    #ffffff
-  );
+  padding: 4rem 1.25rem;
+  overflow: hidden;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 75% 20%, rgba(64, 135, 82, 0.3), transparent 40%),
+    linear-gradient(135deg, #071a14, #113b2b 60%, #071a14);
+}
+
+.home-main::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 38rem;
+  height: 38rem;
+  max-width: 90vw;
+  max-height: 90vw;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 .home-hero {
+  position: relative;
+  z-index: 1;
   width: 100%;
-  max-width: 52rem;
+  max-width: 72rem;
+  margin: auto;
   text-align: center;
 }
 
-.home-hero h1 {
-  font-size: clamp(2rem, 6vw, 3.5rem);
-  line-height: 1.2;
-  margin: 0 0 1.25rem;
+.home-eyebrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
 }
 
-.home-hero p {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--color-secondary);
-  margin: 0 0 2rem;
+.home-live-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 0.75rem var(--color-primary);
+}
+
+.home-hero h1 {
+  max-width: 100%;
+  margin: 2rem auto;
+  font-size: clamp(1.6rem, 5.2vw, 5rem);
+  font-weight: 900;
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  white-space: nowrap;
+}
+
+.home-hero h1 span {
+  display: block;
+  color: var(--color-primary);
+}
+
+.home-hero .home-description {
+  max-width: 38rem;
+  margin: 0 auto 2rem;
+  color: #c8d8ce;
+  font-size: 1.05rem;
+  line-height: 1.7;
 }
 
 #iniciar-chat {
   width: 100%;
-  padding: 0.9375rem 2rem;
+  max-width: 17rem;
+  padding: 1rem 1.75rem;
   border: none;
   border-radius: 0.75rem;
-  background-color: var(--color-primary);
-  color: white;
+  background: var(--color-primary);
+  color: #092015;
   font-size: 1rem;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
+  font-weight: 800;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
+  transition: background 0.2s, transform 0.2s;
 }
 
 #iniciar-chat:hover {
-  background-color: var(--color-primary-hover);
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
 }
-
-
-/* =========================================
-   3. SELECCION DE PERSONAJES EN HOME
-========================================= */
 
 .personajes {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0.75rem;
-  margin-top: 2rem;
+  gap: 1rem;
+  width: 100%;
+  max-width: 62rem;
+  margin: 2.5rem auto 0;
 }
 
 .personajes[hidden] {
   display: none;
 }
 
-.personajes a {
+.personajes .legend-card {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 5rem;
-  padding: 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.75rem;
-  background-color: white;
-  color: var(--color-text);
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-height: 17rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 1rem;
+  color: #ffffff;
+  font-weight: 400;
+  text-align: left;
   text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
 }
 
-.personajes a:hover {
+.personajes .legend-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.12);
   border-color: var(--color-primary);
-  background-color: var(--color-light);
 }
 
+.legend-number {
+  color: var(--color-primary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
 
-/* =========================================
-   4. CONTENEDOR PRINCIPAL DEL CHAT
-========================================= */
+.legend-icon {
+  font-size: 2.25rem;
+}
+
+.legend-name {
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.legend-description {
+  color: #c8d8ce;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.legend-action {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.home-hero .home-footer-note {
+  margin: 2.5rem 0 0;
+  color: #93b3a1;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* ========================================
+   4. CHAT / LAYOUT Y ENCABEZADO
+======================================== */
 
 .chat-container {
   display: flex;
@@ -180,26 +278,23 @@ input:focus-visible {
   min-height: 0;
   margin: 0 auto;
   padding: 0 0.75rem 0.75rem;
+  color: #f1f8ee;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(44, 110, 62, 0.18), transparent 65%),
+    linear-gradient(180deg, #0d2a20, #071a14);
+  border-left: 1px solid #254734;
+  border-right: 1px solid #254734;
 }
-
-.chat-container > p {
-  margin: 0.75rem 0.25rem;
-  color: var(--color-secondary);
-  font-size: 0.875rem;
-}
-
-
-/* =========================================
-   5. ENCABEZADO DEL CHAT
-========================================= */
 
 .chat-header {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   gap: 0.5rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 0.4rem;
+  background: rgba(13, 48, 35, 0.85);
+  border-bottom: 1px solid #335741;
+  border-radius: 0 0 1rem 1rem;
 }
 
 #menu-button,
@@ -209,33 +304,35 @@ input:focus-visible {
   align-items: center;
   gap: 0.5rem;
   padding: 0.625rem;
-  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid #345840;
   border-radius: 0.5rem;
-  background-color: transparent;
-  color: var(--color-text);
+  color: #f1f8ee;
 }
 
 #menu-button:hover,
 #character-button:hover {
-  background-color: var(--color-light);
+  background: #244935;
 }
 
 #menu-button {
+  grid-column: 1;
+  grid-row: 1;
   font-size: 1.5rem;
 }
 
-#character-button {
-  font-size: 0.875rem;
-  font-weight: bold;
-}
-
-
-/* =========================================
-   6. SELECTOR DE PERSONAJES DEL CHAT
-========================================= */
-
 .character-selector {
   position: relative;
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  min-width: 0;
+}
+
+#character-button {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.875rem;
+  font-weight: 800;
 }
 
 .character-menu {
@@ -243,19 +340,16 @@ input:focus-visible {
   top: calc(100% + 0.5rem);
   right: 0;
   z-index: 20;
-
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-
   min-width: 13.75rem;
   max-width: 85vw;
   padding: 0.5rem;
-
-  background-color: white;
-  border: 1px solid var(--color-border);
+  background: #102f23;
+  border: 1px solid #345840;
   border-radius: 0.75rem;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.3);
 }
 
 .character-menu[hidden] {
@@ -266,33 +360,77 @@ input:focus-visible {
   display: block;
   padding: 0.75rem;
   border-radius: 0.5rem;
-  color: var(--color-text);
+  color: #f1f8ee;
   text-decoration: none;
   font-size: 0.875rem;
 }
 
 .character-menu a:hover,
 .character-menu a[aria-current="page"] {
-  background-color: var(--color-light);
-  color: var(--color-primary-hover);
+  background: #244935;
+  color: var(--color-primary);
 }
 
+.chat-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
 
-/* =========================================
-   7. MENSAJES DEL CHAT
-========================================= */
+.chat-nav a {
+  padding: 0.5rem;
+  color: #d7ead9;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.chat-nav a:hover {
+  color: var(--color-primary);
+}
+
+.chat-container > p.chat-tagline {
+  margin: 1rem 0.5rem 0.75rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.chat-tagline span {
+  color: #b9d0bf;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+/* ========================================
+   5. CHAT / MENSAJES Y FORMULARIO
+======================================== */
 
 #chat-messages {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-
   flex: 1;
   min-height: 0;
-
-  padding: 1rem 0.25rem;
+  margin-top: 0.25rem;
+  padding: 0.85rem 0.65rem;
   overflow-y: auto;
   overscroll-behavior: contain;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.012) 0,
+      rgba(255, 255, 255, 0.012) 4rem,
+      transparent 4rem,
+      transparent 8rem
+    ),
+    #0b241a;
+  border: 1px solid #2b4e39;
+  border-radius: 1.15rem;
 }
 
 .message-user,
@@ -300,92 +438,107 @@ input:focus-visible {
   width: fit-content;
   max-width: 90%;
   padding: 0.75rem 1rem;
-  border-radius: 1rem;
   font-size: 0.9375rem;
   line-height: 1.5;
   overflow-wrap: anywhere;
+  white-space: pre-wrap;
 }
 
 .message-user {
   align-self: flex-end;
   margin: 0 0 0 auto;
-  background-color: #dbeafe;
-  color: #1e3a8a;
+  background: #c7f36b;
+  color: #102318;
+  border: 1px solid #d6fa8f;
+  border-radius: 1rem 1rem 0.3rem 1rem;
+  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.12);
 }
 
 .message-character {
   align-self: flex-start;
   margin: 0 auto 0 0;
-  background-color: #f3f4f6;
-  color: var(--color-text);
+  background: #1b3b2c;
+  color: #f1f8ee;
+  border: 1px solid #375c44;
+  border-radius: 1rem 1rem 1rem 0.3rem;
 }
 
 .typing-indicator {
+  color: var(--color-primary);
   font-style: italic;
-  color: var(--color-secondary);
 }
-
-
-/* =========================================
-   8. FORMULARIO DEL CHAT
-========================================= */
 
 #chat-form {
   display: flex;
   align-items: stretch;
   flex-shrink: 0;
   gap: 0.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--color-border);
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: #102e22;
+  border: 1px solid #345840;
+  border-radius: 1rem;
 }
 
 #message-input {
   flex: 1;
   min-width: 0;
   padding: 0.75rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.625rem;
+  background: #091f17;
+  color: #ffffff;
+  border: 1px solid #42634c;
+  border-radius: 0.75rem;
   font-size: 1rem;
+}
+
+#message-input::placeholder {
+  color: #94af9e;
+}
+
+#message-input:focus {
+  border-color: var(--color-primary);
+  outline: 2px solid rgba(199, 243, 107, 0.3);
+  outline-offset: 1px;
 }
 
 #chat-form button {
   padding: 0.75rem 1rem;
-  background-color: var(--color-primary);
-  color: white;
+  background: var(--color-primary);
+  color: #102318;
   border: none;
-  border-radius: 0.625rem;
-  font-weight: bold;
+  border-radius: 0.75rem;
+  font-weight: 800;
 }
 
 #chat-form button:hover:not(:disabled) {
-  background-color: var(--color-primary-hover);
+  background: var(--color-primary-hover);
 }
 
 #chat-form button:disabled {
+  background: #79936b;
+  color: #18301f;
   opacity: 0.6;
   cursor: not-allowed;
 }
 
-
-/* =========================================
-   9. SIDEBAR E HISTORIAL
-========================================= */
+/* ========================================
+   6. SIDEBAR / HISTORIAL
+======================================== */
 
 #chat-sidebar {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-
   width: 17.5rem;
   max-width: 85vw;
   height: 100dvh;
   padding: 1.25rem;
-
-  background-color: white;
-  box-shadow: 0.25rem 0 1rem rgba(0, 0, 0, 0.15);
-
   overflow-y: auto;
+  background: #0d281e;
+  color: #f1f8ee;
+  border-right: 1px solid #345840;
+  box-shadow: 0.75rem 0 2rem rgba(0, 0, 0, 0.35);
   transition: transform 0.3s ease;
 }
 
@@ -401,43 +554,44 @@ input:focus-visible {
 }
 
 .sidebar-header h2 {
-  font-size: 1.125rem;
   margin: 0;
+  color: #ffffff;
+  font-size: 1.125rem;
 }
 
 #close-sidebar {
   padding: 0.5rem;
+  background: transparent;
+  color: #f1f8ee;
   border: none;
   border-radius: 0.5rem;
-  background-color: transparent;
   font-size: 1.25rem;
 }
 
 #close-sidebar:hover {
-  background-color: var(--color-light);
+  background: #244935;
 }
 
 #new-chat {
   width: 100%;
   margin-top: 1.5rem;
   padding: 0.75rem;
-
+  background: var(--color-primary);
+  color: #102318;
   border: none;
   border-radius: 0.625rem;
-  background-color: var(--color-primary);
-  color: white;
-  font-weight: bold;
+  font-weight: 800;
 }
 
 #new-chat:hover {
-  background-color: var(--color-primary-hover);
+  background: var(--color-primary-hover);
 }
 
 #sidebar-overlay {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .overlay-hidden {
@@ -451,46 +605,238 @@ input:focus-visible {
   margin-top: 1rem;
 }
 
+#chat-history > p {
+  color: #b9d0bf;
+}
+
 .history-item {
   width: 100%;
   padding: 0.75rem;
-
-  border: none;
+  background: rgba(255, 255, 255, 0.04);
+  color: #e6f2e5;
+  border: 1px solid #2e513c;
   border-radius: 0.5rem;
-  background-color: transparent;
-  color: var(--color-text);
   text-align: left;
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .history-item:hover {
-  background-color: #f0f0f0;
+  background: #244935;
+  color: var(--color-primary);
 }
 
+/* ========================================
+   7. ABOUT / PROYECTO Y TECNOLOGIAS
+======================================== */
 
-/* =========================================
-   10. ABOUT - ESTILOS GENERALES
-========================================= */
-
-#app > main:not(.home-main),
-#app > section:not(.chat-container) {
+#app > main.about-main {
   width: 100%;
-  max-width: 52rem;
+  max-width: none;
+  min-height: calc(100dvh - 4.5rem);
+  margin: 0;
+  padding: 3.5rem 1rem 4rem;
+  color: #ffffff;
+  line-height: 1.6;
+  background:
+    radial-gradient(circle at 85% 10%, rgba(83, 161, 92, 0.22), transparent 38%),
+    linear-gradient(135deg, #071a14, #113b2b 65%, #071a14);
+}
+
+.about-content {
+  width: 100%;
+  max-width: 70rem;
   margin: 0 auto;
-  padding: 2rem 1rem;
+}
+
+.about-hero {
+  max-width: 55rem;
+  margin-bottom: 3rem;
+}
+
+.about-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.about-dot {
+  flex-shrink: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.about-hero h1 {
+  margin: 1.5rem 0;
+  font-size: clamp(2.5rem, 6vw, 4.8rem);
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.055em;
+}
+
+.about-hero h1 span {
+  display: block;
+  color: var(--color-primary);
+}
+
+.about-intro {
+  max-width: 47rem;
+  color: #c8d8ce;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.about-intro strong {
+  color: #ffffff;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.about-card {
+  padding: 1.75rem;
+  background: rgba(255, 255, 255, 0.065);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1.25rem;
+}
+
+.about-card-number {
+  color: var(--color-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.about-card h2 {
+  margin: 1.25rem 0;
+  color: #ffffff;
+  font-size: 1.6rem;
+  letter-spacing: -0.035em;
+}
+
+.about-card p {
+  color: #c8d8ce;
+  line-height: 1.75;
+}
+
+.about-card p + p {
+  margin-top: 1rem;
+}
+
+.about-features {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #c8d8ce;
+  line-height: 1.75;
+}
+
+.about-features li {
+  padding-left: 0.25rem;
+  margin-bottom: 0.7rem;
+}
+
+.about-features li::marker {
+  color: var(--color-primary);
+}
+
+.about-section-heading {
+  margin-bottom: 1.5rem;
+}
+
+.about-section-heading h2 {
+  margin: 0.85rem 0;
+  color: #ffffff;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+.about-section-heading p {
+  color: #c8d8ce;
+}
+
+.about-tech-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+.about-tech-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+}
+
+.about-tech-number {
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.about-tech-item h3 {
+  margin: 0 0 0.5rem;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.about-tech-item p {
+  margin: 0;
+  color: #b9d0bf;
+  font-size: 0.875rem;
   line-height: 1.6;
 }
 
+.about-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
 
-/* =========================================
-   11. TABLET - DESDE 768px
-========================================= */
+.about-bottom p {
+  max-width: 33rem;
+  margin: 0;
+  color: #b9d0bf;
+  font-size: 0.875rem;
+}
+
+.about-cta {
+  display: inline-flex;
+  justify-content: center;
+  padding: 0.9rem 1.5rem;
+  border-radius: 0.75rem;
+  background: var(--color-primary);
+  color: #092015;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.about-cta:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ========================================
+   8. RESPONSIVE / TABLET
+======================================== */
 
 @media (min-width: 48rem) {
-
   .home-header {
     padding: 1rem 2rem;
   }
@@ -504,21 +850,16 @@ input:focus-visible {
   }
 
   .home-main {
-    padding: 3rem 2rem;
-  }
-
-  .home-hero p {
-    font-size: 1.125rem;
-  }
-
-  #iniciar-chat {
-    width: auto;
-    min-width: 12rem;
+    padding: 4rem 2rem;
   }
 
   .personajes {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1rem;
+  }
+
+  #iniciar-chat {
+    width: auto;
+    min-width: 17rem;
   }
 
   .chat-container {
@@ -526,7 +867,23 @@ input:focus-visible {
   }
 
   .chat-header {
+    grid-template-columns: auto minmax(0, 1fr) auto;
     padding: 1rem 0;
+  }
+
+  .chat-nav {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 1.5rem;
+  }
+
+  .chat-nav a {
+    font-size: 0.875rem;
+  }
+
+  .character-selector {
+    grid-column: 3;
+    grid-row: 1;
   }
 
   #character-button {
@@ -546,38 +903,33 @@ input:focus-visible {
     padding: 0.75rem 1.5rem;
   }
 
-  #app > main:not(.home-main),
-  #app > section:not(.chat-container) {
-    padding: 3rem 2rem;
+  #app > main.about-main {
+    padding: 5rem 2rem;
+  }
+
+  .about-grid,
+  .about-tech-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
-
-/* =========================================
-   12. DESKTOP - DESDE 1024px
-========================================= */
+/* ========================================
+   9. RESPONSIVE / DESKTOP
+======================================== */
 
 @media (min-width: 64rem) {
-
   .home-header {
     padding: 1.25rem 3rem;
   }
 
-  .home-main {
-    padding: 4rem 2rem;
-  }
-
-  .home-hero h1 {
-    font-size: 3.5rem;
-  }
-
   .personajes {
     gap: 1.5rem;
-  }
-
-  .personajes a {
-    min-height: 6rem;
-    font-size: 1.125rem;
   }
 
   .chat-container {
@@ -598,77 +950,42 @@ input:focus-visible {
     width: 20rem;
   }
 
-  #app > main:not(.home-main),
-  #app > section:not(.chat-container) {
-    padding: 4rem 2rem;
+  .about-tech-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
+/* ========================================
+   10. AJUSTES PARA CELULARES PEQUENOS
+======================================== */
 
-/* =========================================
-   13. ACCESIBILIDAD
-========================================= */
+@media (max-width: 30rem) {
+  .home-logo {
+    font-size: 0.9rem;
+  }
+
+  .home-header nav a {
+    font-size: 0.8rem;
+  }
+
+  .home-main {
+    padding: 3rem 1rem;
+  }
+
+  .home-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ========================================
+   11. ACCESIBILIDAD
+======================================== */
 
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
   }
 }
-
-/* NAVEGACION DEL SIDEBAR */
-
-/* NAVEGACION DEL CHAT */
-
-#menu-button {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.character-selector {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  min-width: 0;
-}
-
-.chat-nav {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  grid-column: 1 / -1;
-  grid-row: 2;
-}
-
-.chat-nav a {
-  padding: 0.5rem;
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 0.875rem;
-}
-
-.chat-nav a:hover {
-  color: var(--color-primary);
-}
-
-/* TABLET Y DESKTOP */
-
-@media (min-width: 48rem) {
-  .chat-header {
-    grid-template-columns: auto minmax(0, 1fr) auto;
-  }
-
-  .chat-nav {
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .character-selector {
-    grid-column: 3;
-    grid-row: 1;
-  }
-}
-
