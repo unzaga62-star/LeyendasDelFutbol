@@ -15,6 +15,12 @@ const NOMBRES = {
   maradona: 'Diego Maradona'
 }
 
+const NOMBRES_CORTOS = {
+  bilardo: 'Bilardo',
+  zlatan: 'Zlatan',
+  maradona: 'Maradona'
+}
+
 function obtenerPersonaje() {
   const params = new URLSearchParams(window.location.search)
   const personaje = params.get('personaje') || 'bilardo'
@@ -53,7 +59,9 @@ export function renderChat() {
     aria-controls="character-menu"
   >
     <span>⚽</span>
-    <span>${nombrePersonaje}</span>
+
+    <span class="character-name-full">${nombrePersonaje}</span>
+    <span class="character-name-short">${NOMBRES_CORTOS[personaje]}</span>
     <span>⌄</span>
   </button>
 
