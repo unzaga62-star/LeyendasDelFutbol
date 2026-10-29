@@ -2,15 +2,14 @@
 export function renderChatForm() {
   return `
     <form id="chat-form">
-      <input
-        type="text"
+      <textarea
         id="message-input"
         placeholder="Escribí tu mensaje..."
-        autocomplete="off"
         aria-label="Escribir mensaje"
+        rows="1"
         maxlength="2000"
         required
-      >
+      ></textarea>
 
       <button type="submit">
         Enviar
@@ -18,3 +17,4 @@ export function renderChatForm() {
     </form>
   `
 }
+

@@ -141,6 +141,36 @@ export function setupChat() {
   const botonPersonaje = document.querySelector('#character-button')
   const menuPersonajes = document.querySelector('#character-menu')
 
+
+  
+  function ajustarAlturaInput() {
+  input.style.height = 'auto'
+
+  const alturaMaxima = 128
+  const alturaNecesaria = input.scrollHeight + 2
+
+  input.style.height = `${
+    Math.min(alturaNecesaria, alturaMaxima)
+  }px`
+  }
+
+  input.addEventListener(
+    'input',
+    ajustarAlturaInput,
+    { signal }
+  )
+
+  input.addEventListener('keydown', (event) => {
+    if (
+      event.key === 'Enter' &&
+      !event.shiftKey &&
+      !event.isComposing
+    ) {
+      event.preventDefault()
+      form.requestSubmit()
+    }
+  }, { signal })
+
   // 2. Personaje seleccionado
 
   const personaje = obtenerPersonaje()
@@ -316,6 +346,7 @@ botonNuevoChat.addEventListener('click', () => {
   // Restablecer el formulario de la nueva conversación
   actualizarEstadoFormulario()
   input.value = ''
+  ajustarAlturaInput()
 
   cerrarMenu()
   input.focus()
@@ -458,6 +489,7 @@ guardarEnStorage([conversacionDeLaPeticion])
 mostrarConversaciones()
 
     input.value = ''
+    ajustarAlturaInput()
     addMessage(message, 'user')
 
     actualizarEstadoFormulario()
